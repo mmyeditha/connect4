@@ -3,7 +3,7 @@ import numpy as np
 class Connect4:
 
     def __init__(self):
-        self.board = np.zeros((7, 6))
+        self.board = np.zeros((6, 7))
 
     def displayBoard(self):
         print(self.board)
@@ -11,7 +11,7 @@ class Connect4:
     def input(self, marker):    #marker is 1 for X or 2 for O
         inputting = True
         while(inputting):
-            col = input('Player '+str(marker)+" Pick a column 1-6: ")
+            col = input('Player '+str(marker)+" Pick a column 1-7: ")
             try:
                 col = int(col) - 1
                 inputting = False
@@ -19,11 +19,11 @@ class Connect4:
                 print('Please enter a number')
                 continue
 
-        for i in range(0,7):
-            if self.board[6-i][col] == 0:
-                self.board[6-i][col] = marker
+        for i in range(0,6):
+            if self.board[5-i][col] == 0:
+                self.board[5-i][col] = marker
                 break
-            elif 6-i == 1:
+            elif 5-i == 1:
                 print('Column full')
             else:
                 continue
@@ -34,26 +34,45 @@ class Connect4:
 #checks not working yet
     def checkVertLines(self, marker):
         # Checkin lines
-        for j in range(0, 6):
-            for i in range(0, 3):
-                if self.board[i][j] == marker and self.board[i+1][j] == marker and self.board[i+2][j] == marker and self.board[i+3][j] == marker:
+        for i in range(0, 7):
+            for j in range(3, 6):
+                if self.board[j][i] == self.board[j-1][i] == self.board[j-2][i] == self.board[j-3][i] == marker:
                     return True
         return False
                 
     def checkHorizLines(self, marker):
-        size = self.board.shape #(rows, cols)
-        for i in range(0, size[0]):
-            for j in range(0,3 ):
-                if self.board[i][j] == marker and self.board[i+1][j] == marker and self.board[i+2][j] == marker and self.board[i+3][j] == marker:
+        for j in range(0, 6):
+            for i in range(0, 4):
+                if self.board[j][i] == self.board[j][i+1] == self.board[j][i+2] ==  self.board[j][i+3] == marker:
                     return True
         return False
 
+    def checkDiagR(self, marker):
+        for j in range(3,6):
+            for i in range(0,4):
+                if self.board[j][i] == self.board[j-1][i+1] == self.board[j-2][i+2] == self.board[j-3][i+3] == marker:
+                    return True
+        return False
+
+    def checkDiagL(self, marker):
+        checkedNums = []
+        indices = []
+        for j in range(3,6):
+            for i in range(3,7):
+                checkedNums.append(self.board[j, i])
+                indices.append(str(j) + ',' + str(i))
+                if self.board[j][i] == self.board[j-1][i-1] == self.board[j-2][i-2] == self.board[j-3][i-3] == marker:
+                    return True
+        return checkedNums, indices
+
 c = Connect4()
 c.input(1)
+c.input(2)
 c.input(1)
+c.input(2)
+c.input(2)
 c.input(1)
-c.input(1)
-c.input(1)
-c.input(1)
-c.input(1)
+c.input(2)
+c.input(2)
+c.input(2)
 c.input(1)
