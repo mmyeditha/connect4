@@ -57,22 +57,10 @@ class Connect4:
     def checkDiagL(self, marker):
         checkedNums = []
         indices = []
-        for j in range(3,6):
-            for i in range(3,7):
+        for j in range(3, 6):
+            for i in range(3, 7):
                 checkedNums.append(self.board[j, i])
                 indices.append(str(j) + ',' + str(i))
                 if self.board[j][i] == self.board[j-1][i-1] == self.board[j-2][i-2] == self.board[j-3][i-3] == marker:
                     return True
-        return checkedNums, indices
-
-c = Connect4()
-c.input(1)
-c.input(2)
-c.input(1)
-c.input(2)
-c.input(2)
-c.input(1)
-c.input(2)
-c.input(2)
-c.input(2)
-c.input(1)
+        return False
