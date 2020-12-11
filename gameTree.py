@@ -58,7 +58,7 @@ class MCTS():
         self.Es = {}  # stores game.getGameEnded ended for board s
         self.Vs = {}  # stores game.getValidMoves for board s
 
-    def getActionProb(self, canonicalBoard, temp=1):
+    def getActionProb(self, canonicalBoard, temp=1):    
         for i in range(self.args.numMCTSSims):
             self.search(canonicalBoard)
 

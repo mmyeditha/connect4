@@ -33,7 +33,6 @@ class Connect4:
         col -= 1
         for i in range(0, 6):
             if self.board[5-i][col] == 0:
-                self.board[5-i][col] = marker
                 return True
             elif 5-i == 1:
                 return False

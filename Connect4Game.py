@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Connect4Game:
+class GameWrapper:
     """
     Designed for use with GameTree generation.
     All functions require board as input
